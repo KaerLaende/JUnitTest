@@ -1,6 +1,7 @@
 import org.example.HomeWork.User;
 
 import org.example.HomeWork.ValidateEmail;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,5 +45,10 @@ public class UserTest {
     @Test
     public void testIsEqualsEmailAndLogin() {
         users.stream().peek(x->System.out.println("Проверяется на не равенство Login & Email у -"+x.getLogin())).forEach(x -> assertNotEquals(x.getLogin(), x.getEmail()));
+    }
+
+    @AfterAll
+    public void printAfter(){
+        System.out.println("Testing is finish");
     }
 }
