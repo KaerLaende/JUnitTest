@@ -13,23 +13,34 @@ import static org.example.HomeWork.User.users;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
-
-    private User user;
+    public static final String DEFAULT_LOGIN = "noob";
+    public static final String DEFAULT_EMAIL = "noob@noobnui.noobs";
+    public static final String CORRECT_LOGIN = "GubkaBoB";
+    public static final String CORRECT_EMAIL = "GubkaBoB@mail.ru";
+    private User out;
     private final ValidateEmail validateEmail = new ValidateEmail();
 
-    @BeforeEach
-    public void addUser() {
-        User user1 = new User("GubkaBoB", "GubkaBoB@mail.ru");
-        User user2 = new User("Genna", "genna@mail.ru");
-        User user3 = new User("genna@mail.ru", "genna@mail.ru");
-        User user4 = new User("Neznaika", "nuznaikaWTF");
-        User userNull = new User(null, "@null");
-    }
-
+//    @BeforeEach
+//    public void addUser() {
+//        User user1 = new User("GubkaBoBa", "GubkaBoBa@mail.ru");
+//        User user2 = new User("Genna", "genna@mail.ru");
+//        User user3 = new User("genna@mail.ru", "genna@mail.ru");
+//        User user4 = new User("Neznaika", "nuznaikaWTF");
+//        User userNull = new User(null, "@null");
+//    }
 
     @Test
-    public void testCreateUser() {
-        users.forEach(Assertions::assertNotNull);
+    public void testCreateUserParameters() {
+        out = new User(CORRECT_LOGIN, CORRECT_EMAIL);
+        assertEquals(CORRECT_LOGIN, out.getLogin());
+        assertEquals(CORRECT_EMAIL, out.getEmail());
+    }
+
+    @Test
+    public void testCreateUserNoParameters() {
+        out = new User();
+        assertEquals(DEFAULT_LOGIN, out.getLogin());
+        assertEquals(DEFAULT_EMAIL, out.getEmail());
     }
 
     @Test
@@ -47,8 +58,4 @@ public class UserTest {
         users.stream().peek(x->System.out.println("Проверяется на не равенство Login & Email у -"+x.getLogin())).forEach(x -> assertNotEquals(x.getLogin(), x.getEmail()));
     }
 
-    @AfterAll
-    public void printAfter(){
-        System.out.println("Testing is finish");
-    }
 }
